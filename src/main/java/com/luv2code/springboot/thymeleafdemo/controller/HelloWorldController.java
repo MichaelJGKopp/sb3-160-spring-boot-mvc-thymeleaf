@@ -1,7 +1,12 @@
 package com.luv2code.springboot.thymeleafdemo.controller;
 
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.net.http.HttpRequest;
 
 @Controller
 public class HelloWorldController {
@@ -22,13 +27,15 @@ public class HelloWorldController {
         return "helloworld";
     }
 
-//    // create a mapping for "/hello"
-//
-//    @GetMapping("/hello")
-//    public String sayHello(Model theModel) {
-//
-//        theModel.addAttribute("theDate", java.time.LocalDateTime.now());
-//
-//        return "helloworld";
-//    }
+    // new controller method to read form data and add data to the model
+    @RequestMapping("/processFormVersionTwo")
+    public String toUpperCase(HttpServletRequest request, Model theModel) {
+
+        String studentName = request.getParameter("studentName");
+        System.out.println("studentName: " + studentName);
+
+        theModel.addAttribute("studentNameUpperCase", studentName.toUpperCase());
+
+        return "helloworld-version-two";
+    }
 }
