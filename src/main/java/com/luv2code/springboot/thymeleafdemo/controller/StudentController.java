@@ -16,11 +16,16 @@ public class StudentController {
     @Value("${countries}")
     private List<String> countries;
 
+    @Value("${programmingLanguages}")
+    private List<String> programmingLanguages;
+
     @GetMapping("/showStudentForm")
     public String studentForm(Model model) {
 
-        model.addAttribute("student", new Student("Tim", "Buchalka", "Germany"));
+        model.addAttribute("student",
+                new Student("Tim", "Buchalka", "Germany", "Python"));
         model.addAttribute("countries", countries);
+        model.addAttribute("programmingLanguages", programmingLanguages);
 
         return "student-form";
     }
@@ -29,7 +34,7 @@ public class StudentController {
     public String processStudentForm(@ModelAttribute("student") Student student) {
 
         System.out.println("student: " + student.getFirstName() + " " + student.getLastName()
-                + " from " + student.getCountry());
+                + " from " + student.getCountry() + " and likes " + student.getFavoriteLanguage());
 
         return "student-confirmation";
     }
