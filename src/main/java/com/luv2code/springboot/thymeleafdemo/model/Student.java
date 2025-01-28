@@ -1,13 +1,19 @@
 package com.luv2code.springboot.thymeleafdemo.model;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class Student {
 
     private String firstName;
     private String lastName;
     private String country;
     private String favoriteLanguage;
+    private List<String> favoriteOperatingSystem;
 
     public Student() {
+        this("", "", "");
     }
 
     public Student(String firstName, String lastName) {
@@ -18,11 +24,12 @@ public class Student {
         this(firstName, lastName, country, "");
     }
 
-    public Student(String firstName, String lastName, String country, String favoriteLanguage) {
+    public Student(String firstName, String lastName, String country, String favoriteLanguage, String... favoriteOperatingSystem) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.country = country;
         this.favoriteLanguage = favoriteLanguage;
+        this.favoriteOperatingSystem = new ArrayList<>(Arrays.asList(favoriteOperatingSystem));
     }
 
     public String getFirstName() {
@@ -57,6 +64,14 @@ public class Student {
         this.favoriteLanguage = favoriteLanguage;
     }
 
+    public List<String> getFavoriteOperatingSystem() {
+        return favoriteOperatingSystem;
+    }
+
+    public void setFavoriteOperatingSystem(List<String> favoriteOperatingSystem) {
+        this.favoriteOperatingSystem = favoriteOperatingSystem;
+    }
+
     @Override
     public String toString() {
         return "Student{" +
@@ -64,6 +79,7 @@ public class Student {
                 ", lastName='" + lastName + '\'' +
                 ", country='" + country + '\'' +
                 ", favoriteLanguage='" + favoriteLanguage + '\'' +
+                ", favoriteOperatingSystem=" + favoriteOperatingSystem +
                 '}';
     }
 }
